@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+$border-color: #FC976F;
+$arrow-color: darken(#EBE19B, 8%);
+$color: #474B3B;
+
+.l-flowchat {
+    margin: {
+        top: 3rem;
+        bottom: 3rem;
+    }
+    &_container {
+        margin: {
+            top: 2rem;
+            bottom: 1.2rem;
+        }
+        padding: 2.5rem;
+        position: relative; /* 番号の位置調整 */
+        &::before {
+            /* 番号の位置調整 */
+            position: absolute;
+            top: -2rem;
+            left: -2rem;
+        }
+        &:not(:last-of-type) {
+            /* 矢印の位置調整 */
+            &::after {
+                position: absolute;
+                bottom: -3.1rem;
+                left: 3rem;
+            }
+        }
+        p {
+            margin-bottom: 0.4rem;
+        }
+    }
+}
+
+.o-flowchat {
+    counter-reset: number; /* カウンタを`o-flowchat`ごとにリセット */
+    &_container {
+        border: 2px solid $border-color;
+        border-radius: 1rem;
+        &::before {
+            /* 番号のデザイン */
+            background-color: $bg-color;
+            color: rgba($border-color, 0.6);
+            border-radius: 1rem;
+            font-size: 3rem;
+            counter-increment: number; /* 採番のインクリメント */
+            content: counter(number, decimal-leading-zero); /* brefore疑似要素に番号を自動採番で挿入。`decimal-leading-zero`でゼロパディングも実施 */
+        }
+        &:not(:last-of-type) {
+            /* 矢印のデザイン */
+            &::after {
+                font: {
+                    family: "Font Awesome 5 Free", sans-serif;
+                    weight: 900;
+                    size: 3rem;
+                }
+                content: "\f309";
+                color: $arrow-color;
+            }
+        }
+        p {
+            color: $color;
+        }
+    }
+}
